@@ -13,20 +13,41 @@ nunjucks.configure('public/views', {
   express: app
 })
 
-app.get('/', function (req, res) {
-  res.render('index.html', {})
-})
+var userCount = 0
+var htmlCode 
+var cssCode
 
-io.on('connection', function (socket) {
-  console.log('a user connected')
-  socket.on('disconnect', function () {
-    console.log('user disconnected')
+app.get('/', function (req, res) {
+  res.render('index.html', {
+    htmlCode: htmlCode,
+    cssCode: cssCode,
+    userCount: userCount
   })
 })
 
 io.on('connection', function (socket) {
-  socket.on('chat message', function (msg) {
-    io.emit('chat message', msg)
+  console.log(userCount)
+  userCount ++
+  io.emit('userCount', userCount)
+  socket.on('disconnect', function () {
+    console.log(userCount)
+    io.emit('userCount', userCount)
+    userCount --
+  })
+})
+
+io.on('connection', function (socket) {
+  socket.on('editorHTML', function (code) {
+    io.emit('editorHTML', code)
+    console.log(userCount)
+    htmlCode = code
+  })
+})
+io.on('connection', function (socket) {
+  socket.on('editorCSS', function (code) {
+    console.log(userCount)
+    io.emit('editorCSS', code)
+    cssCode = code
   })
 })
 
