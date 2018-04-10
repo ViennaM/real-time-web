@@ -1,10 +1,9 @@
 var express = require('express')
 var app = express()
-var request = require('request')
+var http = require('http').Server(app)
+var io = require('socket.io')(http)
 var nunjucks = require('nunjucks')
 var compression = require('compression')
-var path = require('path')
-var io = require('socket.io')
 
 app.use(compression())
 app.use(express.static('public'))
@@ -18,6 +17,19 @@ app.get('/', function (req, res) {
   res.render('index.html', {})
 })
 
-app.listen(5000, function () {
+io.on('connection', function (socket) {
+  console.log('a user connected')
+  socket.on('disconnect', function () {
+    console.log('user disconnected')
+  })
+})
+
+io.on('connection', function (socket) {
+  socket.on('chat message', function (msg) {
+    io.emit('chat message', msg)
+  })
+})
+
+http.listen(5000, function () {
   console.log('server is running on port 5000')
 })
