@@ -1,0 +1,31 @@
+{
+  "name": "codecollab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "uglify": "browserify public/scripts/index.js | uglifyjs > public/scripts/client.js && uglifycss public/styles/main.css > public/styles/min.css",
+    "start": "npm run uglify && node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ViennaM/real-time-web.git"
+  },
+  "author": "Vienna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ViennaM/real-time-web/issues"
+  },
+  "homepage": "https://github.com/ViennaM/real-time-web#readme",
+  "dependencies": {
+    "compression": "^1.7.2",
+    "express": "^4.16.3",
+    "flickity": "^2.1.0",
+    "minify": "^3.0.5",
+    "nunjucks": "^3.1.2",
+    "request": "^2.85.0",
+    "uglifycss": "0.0.29",
+    "socket.io": "2.1.0"
+  }
+
+}
