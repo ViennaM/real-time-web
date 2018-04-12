@@ -9,6 +9,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   background: #F7F8FB;
+  overflow: hidden;
 }
 
 body>header>h1 {
@@ -22,7 +23,7 @@ body>section {
   background: transparent;
 }
 
-body>header {
+body>header{
   width: 100vw;
   background: white;
   box-shadow: 0 10px 30px -17px rgba(0, 0, 0, 0.2);
@@ -33,19 +34,16 @@ body>header {
   max-height: 85px;
 }
 
-header svg {
+header>div>h2>svg {
   width: 20px;
 }
 
-header div {
+header>div {
   display: none;
-}
-
-header div {
   cursor: pointer;
 }
 
-header div ul {
+header>div>ul {
   max-height: 0px;
   overflow: hidden;
   transition: .2s;
@@ -54,7 +52,7 @@ header div ul {
   opacity: 0;
 }
 
-header h2:hover~ul {
+header>div>h2:hover~ul {
   max-height: 90vh;
   background: white;
   transition: .2s;
@@ -63,18 +61,19 @@ header h2:hover~ul {
   opacity: 1;
 }
 
-header ul li {
+header>div>ul>li {
   padding: .5em 0;
 }
 
-header ul li svg {
+header>div>ul>li>svg {
   width: 10px;
   margin-right: 8px;
 }
 
-div h2 {
+div>h2 {
   text-align: right;
 }
+
 
 textarea {
   width: 100%;
@@ -85,13 +84,27 @@ textarea {
   border: none;
 }
 
-h2 {
+section>h2 {
   opacity: .2;
+  font-size: 16px;
 }
 
 #preview {
   width: 100vw;
   border: none;
+  background: white;
+  height: 58vh;
+  overflow: hidden;
+}
+
+#preview>h2 {
+  margin-bottom: 1em;
+}
+
+.html {
+  overflow: scroll;
+  height: 45vh;
+  border: 1px solid #cecece;
 }
 
 #login {
