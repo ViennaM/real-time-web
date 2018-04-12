@@ -61,7 +61,7 @@ document.querySelector('#editorCSS').addEventListener('input', function () {
 })
 
 socket.on('editorCSS', function (code) {
-  previewCSS.innerHTML = '.html ' + code.replace('}', '} .html ')
+  previewCSS.innerHTML = '.html ' + code.replace(/}/g, '} .html ')
   parseCSS.value = code
 })
 
