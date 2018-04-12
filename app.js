@@ -62,6 +62,6 @@ io.on('connection', function (socket) {
   })
 })
 
-http.listen(5000, function () {
-  console.log('server is running on port 5000')
+http.listen(process.env.PORT || 5000, function(){
+  console.log('listening (port 5000)');
 })
