@@ -13,6 +13,7 @@ nunjucks.configure('public/views', {
   express: app
 })
 
+var people = {}
 var userCount = 0
 var htmlCode 
 var cssCode
@@ -25,21 +26,29 @@ app.get('/', function (req, res) {
   })
 })
 
+io.on('connection', function(socket) {
+  socket.on('join', function(name){
+    socket.send(socket.id)
+    people[socket.id] = name
+    io.emit('update-people', people)
+  })
+})
+
 io.on('connection', function (socket) {
-  console.log(userCount)
   userCount ++
   io.emit('userCount', userCount)
   socket.on('disconnect', function () {
-    console.log(userCount)
-    io.emit('userCount', userCount)
+    delete people[socket.id]
+    console.log(socket.id, people)
     userCount --
+    io.emit('update-people', people)
+    io.emit('userCount', userCount)
   })
 })
 
 io.on('connection', function (socket) {
   socket.on('editorHTML', function (code) {
     io.emit('editorHTML', code)
-    console.log(userCount)
     htmlCode = code
   })
 })
