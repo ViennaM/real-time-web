@@ -40,15 +40,18 @@ header svg {
 header div {
   display: none;
 }
+
 header div {
   cursor: pointer;
 }
+
 header div ul {
   max-height: 0px;
   overflow: hidden;
   transition: .2s;
   padding: 0 1em;
   list-style: none;
+  opacity: 0;
 }
 
 header h2:hover~ul {
@@ -57,10 +60,16 @@ header h2:hover~ul {
   transition: .2s;
   padding: 1em;
   padding-bottom: 0;
+  opacity: 1;
 }
 
 header ul li {
   padding: .5em 0;
+}
+
+header ul li svg {
+  width: 10px;
+  margin-right: 8px;
 }
 
 div h2 {
@@ -73,7 +82,7 @@ textarea {
   padding: 1em;
   font-family: 'Fira Mono', monospace;
   font-size: 16px;
-  border:none;
+  border: none;
 }
 
 h2 {

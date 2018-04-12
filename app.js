@@ -30,17 +30,19 @@ io.on('connection', function(socket) {
   socket.on('join', function(name){
     socket.send(socket.id)
     people[socket.id] = name
+    console.log(userCount)
+    io.emit('userCount', userCount)
     io.emit('update-people', people)
   })
 })
 
 io.on('connection', function (socket) {
-  userCount ++
-  io.emit('userCount', userCount)
+  userCount++
   socket.on('disconnect', function () {
     delete people[socket.id]
     console.log(socket.id, people)
-    userCount --
+    userCount--
+    console.log(userCount)
     io.emit('update-people', people)
     io.emit('userCount', userCount)
   })
